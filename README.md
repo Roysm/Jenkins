@@ -2,13 +2,11 @@
 
 ## Getting started
 
-##### In Github:
-
+##### In Github, Jenkins:
+By this instructions: 
+https://secops-sandbox-documentation.readthedocs.io/en/latest/jenkins_github_integration.html
 1. Create a Github access token for Jenkins to clone this repository
-
-##### In Jenkins:
-
-1. Create Access Token, use the user name and password you get to login jenkins
+2. . Create Access Token, use the user name and password you get to login jenkins
 
 ##### In Docker Hub:
 
