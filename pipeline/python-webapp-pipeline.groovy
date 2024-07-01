@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-		dockerhub = credentials('dockerhub')
-        gitRepoUrl = 'https://github.com/RoySCV/Jenkins.git'
+	dockerhub = credentials('DockerHub-Jenkins-Assignment')
+        gitRepoUrl = 'https://github.com/Roysm/Jenkins.git'
         gitRev = 'main'
         credsId = 'github-user-and-access-token'
         dockerfilePath = "webapp/Dockerfile"
