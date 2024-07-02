@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         dockerfilePath = "webapp/Dockerfile"
-        dockerTag = "latest"
     }
     stages {
         stage('Setup') {
@@ -10,7 +9,8 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USR', passwordVariable: 'DOCKERHUB_PSW')]) {
                         env.DOCKER_IMAGE = "${DOCKERHUB_USR}/web-app"
-                        env.DOCKER_IMAGE_FULL_NAME = "${env.DOCKER_IMAGE}:${dockerTag}"
+                        env.DOCKER_TAG = "build-${env.BUILD_NUMBER}"
+                        env.DOCKER_IMAGE_FULL_NAME = "${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
                     }
                 }
             }
@@ -30,7 +30,7 @@ pipeline {
                     echo '----------- Pushing to Docker Hub -----------'
                     // Using Docker plugin to push the image with automatic login
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
-                        docker.image(env.DOCKER_IMAGE_FULL_NAME).push(dockerTag)
+                        docker.image(env.DOCKER_IMAGE_FULL_NAME).push(env.DOCKER_TAG)
                     }
                 }
             }
