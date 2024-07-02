@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-        dockerhub = credentials('dockerhub')
         dockerfilePath = "webapp/Dockerfile"
         dockerImage = "${dockerhub_USR}/web-app"
         dockerTag = "latest"
