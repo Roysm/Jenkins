@@ -15,9 +15,8 @@ pipeline {
                 }
             }
         }
-    }
     
-    stage('Docker Build') {
+        stage('Docker Build') {
             steps {
                 script {
                     echo "Docker Build: \n  File: ${dockerfilePath}\n  Image: ${dockerImageFullName}\n  Context: ${WORKSPACE}"
@@ -26,7 +25,7 @@ pipeline {
             }
         }
     
-    stage('Docker Push') {
+        stage('Docker Push') {
             steps {
                 script {
                     echo '----------- Login Docker Hub -----------'
@@ -36,4 +35,5 @@ pipeline {
                 }
             }
         }
+    }
 }
