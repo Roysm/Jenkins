@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         dockerfilePath = "webapp/Dockerfile"
-        dockerImage = "${dockerhub_USR}/web-app"
+        dockerImage = "${DOCKERHUB_USR}/web-app"
         dockerTag = "latest"
         dockerImageFullName = "${dockerImage}:${dockerTag}"
     }
@@ -28,7 +28,8 @@ pipeline {
             steps {
                 script {
                     echo '----------- Login Docker Hub -----------'
-                    sh "echo ${dockerhub_PSW} | docker login -u ${dockerhub_USR} --password-stdin"
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USR', passwordVariable: 'DOCKERHUB_PSW')]) {
+                    sh "echo ${DOCKERHUB_PSW} | docker login -u ${DOCKERHUB_USR} --password-stdin"
                     echo '----------- Pushing to Docker Hub -----------'
                     sh "docker push ${dockerImageFullName}"
                 }
