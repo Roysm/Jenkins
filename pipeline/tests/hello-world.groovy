@@ -32,6 +32,7 @@ pipeline {
                     sh "echo ${DOCKERHUB_PSW} | docker login -u ${DOCKERHUB_USR} --password-stdin"
                     echo '----------- Pushing to Docker Hub -----------'
                     sh "docker push ${dockerImageFullName}"
+                    }
                 }
             }
         }
