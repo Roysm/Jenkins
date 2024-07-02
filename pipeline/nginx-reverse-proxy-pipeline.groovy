@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USR', passwordVariable: 'DOCKERHUB_PSW')]) {
-                        env.DOCKER_IMAGE = "${DOCKERHUB_USR}/web-app"
+                        env.DOCKER_IMAGE = "${DOCKERHUB_USR}/nginx-reverse-proxy"
                         env.DOCKER_TAG = "build-${env.BUILD_NUMBER}"
                         env.DOCKER_IMAGE_FULL_NAME = "${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
                     }
